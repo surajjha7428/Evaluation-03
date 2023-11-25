@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Masai Doctor Records</title>
+  </head>
+  <link rel="stylesheet" href="doctors.css">
+  <body>
+    <h1>HOSPITAL - DOCTOR RECORDS</h1>
+    <div>
+    <!-- Use this form for data input  -->
+    <form>
+      <label for="">Doctor Name</label><br />
+      <input placeholder="Name" type="text" id="name" />
+      <label for="">Doctor ID</label><br />
+      <input placeholder="Doctor ID" type="text" id="doctor_id" />
+      <label for="">Specialization</label><br />
+      <select id="specialization">
+        <option value="">Select Specialization</option>
+        <option value="Dermatologist">Dermatologist</option>
+        <option value="Dentist">Dentist</option>
+        <option value="Gynecologist">Gynecologist</option>
+      </select><br />
+      <label for="">Experience </label><br />
+      <input placeholder="Experience" type="number" id="experience" />
+      <label for="">Email Address </label><br />
+      <input placeholder="Email" type="email" id="email" />
+      <label for="">Mobile Number </label><br />
+      <input placeholder="Mobile No." type="number" id="mobile" />
+      <input type="submit" value="Submit" />
+    </form>
+    <!-- Use this Select tag for filter part  -->
+    <select id="filter">
+      <option value="">Select Specialization</option>
+      <option value="Dermatologist">Dermatologist</option>
+      <option value="Dentist">Dentist</option>
+      <option value="Gynecologist">Gynecologist</option>
+    </select>
+
+    <table>
+      <style>
+        h1{
+    text-align: center;
+    color:rgb(56, 56, 209);
+    text-decoration: underline;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  div{
+    display: flex;
+  }
+  form{
+    box-shadow:rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width:25%;
+    border-radius: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 1%;
+    padding-bottom: 12%;
+  }
+  label{
+    font-weight:bold;
+  }
+  input{
+    margin-bottom: 4%;
+    width:95%;
+    height:10%;
+  }
+  #specialization{
+    margin-bottom: 4%;
+      width:98%;
+      height:10%;
+  }
+  input[type="submit"]{
+    background-color:rgb(47, 47, 236);
+      color:white;
+      border:none;
+      border-radius:20px;
+  }
+  input[type="submit"]:hover{
+      background-color: rgb(30, 30, 200);
+  }
+  table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 60%;
+    margin: auto;
+    margin-top: 40px;
+    text-align: center;
+    background-color:rgb(78, 78, 148) ;
+  }
+  table td,
+  table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    color:white;
+  }
+  button{
+    background-color: red;
+    border: none;
+  }
+      </style>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Doctor ID</th>
+          <th>Specialization</th>
+          <th>Experience in Years</th>
+          <th>Email</th>
+          <th>Mobile No</th>
+          <th>Role</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Append Rows here using JS & DOM  -->
+      </tbody>
+    </table>
+    </div>
+  </body>
+  <script>
+let myform = document.querySelector("form");
+let stName = document.getElementById("name");
+let id = document.getElementById("doctor_id");
+let speciali = document.getElementById("specialization");
+let experi = document.getElementById("experience");
+let email = document.getElementById("email");
+let mobile = document.getElementById("mobile");
+let tbody = document.querySelector("tbody");
+let Alldata = [];
+myform.addEventListener("submit",function(e)
+{
+    e.preventDefault();
+    let Data ={};
+    Data.input1=stName.value;
+    Data.input2=id.value;
+    Data.input3=speciali.value;
+    Data.input4=experi.value;
+    Data.input5=email.value;
+    Data.input6=mobile.value;
+    Alldata.push(Data)
+    tbody.innerHTML=null
+    Alldata.map((ele)=>
+    {
+        let row = document.createElement("tr")
+        let td1 = document.createElement("td")
+        let td2 = document.createElement("td")
+        let td3 = document.createElement("td")
+        let td4 = document.createElement("td")
+        let td5 = document.createElement("td")
+        let td6 = document.createElement("td")
+        let td7 = document.createElement("td")
+        let td8 = document.createElement("td");
+        let deleteButton = document.createElement("button");
+        td1.innerText=ele.input1
+        td2.innerText=ele.input2
+        td3.innerText=ele.input3
+        td4.innerText=ele.input4
+        td5.innerText=ele.input5
+        td6.innerText=ele.input6
+        if(experi.value>5){
+            td7.innerText="Senior"
+        }
+        else if(experi.value>2 && experi.value<5){
+            td7.innerText="Junior"
+        }
+        else if(experi.value<=1){
+            td7.innerText="Fresher"
+        }
+        document.querySelector("form").reset();
+        deleteButton.innerText = "Delete";
+                deleteButton.addEventListener("click", function () {
+                    let rowIndex = Alldata.indexOf(ele);
+                    Alldata.splice(rowIndex, 1);
+                    row.remove();
+                });
+                td8.appendChild(deleteButton);
+        row.append(td1,td2,td3,td4,td5,td6,td7,td8);
+        tbody.append(row);
+    })
+})
+  </script>
+</html>

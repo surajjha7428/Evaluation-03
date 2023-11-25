@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Card</title>
+</head>
+<body>
+
+<script>
+    function StudentReport(name, rollNo, className, section, science, ssc, maths, english, hindi) {
+        this.name = name;
+        this.rollNo = rollNo;
+        this.className = className;
+        this.section = section;
+        this.science = science;
+        this.ssc = ssc;
+        this.maths = maths;
+        this.english = english;
+        this.hindi = hindi;
+
+        this.Percentage = function () {
+            return ((this.science + this.ssc + this.maths + this.english + this.hindi) / 5).toFixed(1);
+        };
+
+        this.printStudentReport = function () {
+            console.log(`+--------------------+
+|     REPORT CARD    |
++--------------------+
+| Name     - ${this.name}   |
+| Roll no. - ${this.rollNo}      |
+| Class    - ${this.className}     |
+| Section  - ${this.section}       |
+| Science  - ${this.science}      |
+| S.Sc     - ${this.ssc}      |
+| Maths    - ${this.maths}      |
+| English  - ${this.english}      |
+| Hindi    - ${this.hindi}      |
+| Percentage - ${this.Percentage()}% |
++--------------------+`);
+        };
+    }
+    const SurajReport = new StudentReport("Suraj",88, "XII", "A", 72, 72, 45, 50, 27);
+
+    SurajReport.printStudentReport();
+</script>
+
+</body>
+</html>
